@@ -10,9 +10,11 @@ module ActionDispatch
 
         # if secure && ssl check is not disabled, convert to full url with https
         if !secure.nil? && !SslRequirement.disable_ssl_check?
+          options.merge!({
+              :only_path => false,
+          })
           if secure == true || secure == 1 || secure.to_s.downcase == "true"
             options.merge!({
-              :only_path => false,
               :protocol => 'https'
             })
 
